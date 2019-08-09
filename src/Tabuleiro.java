@@ -12,6 +12,7 @@ public class Tabuleiro {
 	public Tabuleiro(char[][] estado) {
 		this.estado = estado;
 		this.posicaoRainhas = new Posicao[8];
+		setPosicaoRainhas();
 	}
 
 	public char[][] getEstado() {
