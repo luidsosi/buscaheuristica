@@ -8,11 +8,19 @@ public class Tabuleiro {
 	public Tabuleiro() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Tabuleiro(Posicao[] posicaoRainhas) {
+		this.posicaoRainhas = posicaoRainhas;
+		this.quantidadeAtaques = 0;
+		setQuantidadeAtaques();
+	}
 
 	public Tabuleiro(char[][] estado) {
 		this.estado = estado;
 		this.posicaoRainhas = new Posicao[8];
+		this.quantidadeAtaques = 0;
 		setPosicaoRainhas();
+		setQuantidadeAtaques();
 	}
 
 	public char[][] getEstado() {
@@ -34,9 +42,27 @@ public class Tabuleiro {
 	public void setQuantidadeAtaques() {
 		for (int i = 0; i < posicaoRainhas.length; i++) {
 			for (int j = 0; j < posicaoRainhas.length; j++) {
-				
+				if (i != j) {
+//					Verifica coluna
+					if(posicaoRainhas[i].getY() == posicaoRainhas[j].getY()) {
+						quantidadeAtaques++;
+					}
+					
+//					Verifica Linha
+					if(posicaoRainhas[i].getX() == posicaoRainhas[j].getX()) {
+						quantidadeAtaques++;
+					}
+					
+//					Verifica diagonal
+					if ((posicaoRainhas[i].getY() + posicaoRainhas[i].getX()) == (posicaoRainhas[j].getY() + posicaoRainhas[j].getX()) ||
+							(posicaoRainhas[i].getX() - posicaoRainhas[i].getY() + 7) == (posicaoRainhas[j].getX() - posicaoRainhas[j].getY() + 7)) {
+						quantidadeAtaques++;
+					}
+				}
 			}
 		}
+		
+		quantidadeAtaques /= 2;
 	}
 	
 	public Posicao[] getPosicaoRainhas() {
@@ -54,10 +80,83 @@ public class Tabuleiro {
 	}
 
 	private void setPosicaoRainhas() {
+		int indexPosicaoRainhas = 0;
 		for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
 			for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
-				if(estado[i][j] == 'R') posicaoRainhas[i] = new Posicao(i, j);
+				if(estado[j][i] == 'R') {
+					posicaoRainhas[indexPosicaoRainhas] = new Posicao(j, i);
+					indexPosicaoRainhas++;
+				}
 			}
 		}
 	}
+	
+	public void printPosicaoRainhas() {
+		for (int i = 0; i < posicaoRainhas.length; i++) {
+			System.out.println(i + ". X = " + posicaoRainhas[i].getX() + (", Y = " + posicaoRainhas[i].getY()));
+		}
+	}
+	
+	@Override
+	public String toString() {		
+		String msg = "";
+		msg += "---------------------------------";
+		
+		for (int i = 0; i < estado.length; i++) {
+			msg += "\n";
+			for (int j = 0; j < estado.length; j++) {
+				msg += "| " + estado[i][j] + " ";
+			}
+			msg += "|";
+			if (i == 4) msg += " Quantidade de Ataques: " + getQuantidadeAtaques();
+			msg += "\n";
+			msg += "---------------------------------";
+		}
+		
+		return msg;
+	}
+	
+	public void print() {
+		System.out.println(toString());
+	}
+	
+	public void subidaEncosta() {
+		int menorQuantidadeAtaques = quantidadeAtaques;
+		Tabuleiro tabuleiroMenor = new Tabuleiro(posicaoRainhas);
+		int menorFinal = quantidadeAtaques +1;
+		Tabuleiro tabuleiroFinal = new Tabuleiro(posicaoRainhas);
+		
+		while (menorQuantidadeAtaques < menorFinal) {
+			menorFinal = menorQuantidadeAtaques;
+			Posicao testePosicaoRainhas[] = new Posicao[8];
+			
+			for (int i = 0; i < testePosicaoRainhas.length; i++) {
+				testePosicaoRainhas[i] = new Posicao(tabuleiroMenor.getPosicaoRainhas()[i].getX(), tabuleiroMenor.getPosicaoRainhas()[i].getY());
+			}
+			tabuleiroFinal = new Tabuleiro(testePosicaoRainhas);
+			for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+				int xOriginal = tabuleiroFinal.getPosicaoRainhas()[i].getX();
+				for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+					tabuleiroFinal.getPosicaoRainhas()[i].setX(j);
+					
+					if (menorQuantidadeAtaques > (new Tabuleiro(tabuleiroFinal.getPosicaoRainhas())).getQuantidadeAtaques()) {
+						Posicao menorPosicaoRainhas[] = new Posicao[8];
+						
+						for (int k = 0; k < menorPosicaoRainhas.length; k++) {
+							menorPosicaoRainhas[i] = new Posicao(tabuleiroFinal.getPosicaoRainhas()[k].getX(), tabuleiroFinal.getPosicaoRainhas()[k].getY());
+						}
+						tabuleiroMenor = new Tabuleiro(tabuleiroFinal.getPosicaoRainhas());
+						menorQuantidadeAtaques = tabuleiroMenor.getQuantidadeAtaques();
+					}
+				}
+				tabuleiroFinal.getPosicaoRainhas()[i].setX(xOriginal);
+			}			
+		}
+		
+		
+		System.out.println(menorFinal);
+		tabuleiroFinal.printPosicaoRainhas();
+	}
+	
+	
 }

@@ -1,7 +1,21 @@
 
 public class Main {
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		char [][] tabuleiroTeste = {
+				{' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ','R',' ',' ',' ',' '},
+				{'R',' ',' ',' ','R',' ',' ',' '},
+				{' ','R',' ',' ',' ','R',' ','R'},
+				{' ',' ','R',' ',' ',' ','R',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' '}
+		};
+		
+		Tabuleiro tabuleiro = new Tabuleiro(tabuleiroTeste);
+		System.out.println(tabuleiro.getQuantidadeAtaques());
+		tabuleiro.printPosicaoRainhas();
+		
+		tabuleiro.subidaEncosta();
 	}
 }
