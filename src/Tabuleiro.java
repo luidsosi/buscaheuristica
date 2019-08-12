@@ -3,6 +3,7 @@ public class Tabuleiro {
 	private char [][] estado;
 	private int quantidadeAtaques = 0;
 	private Posicao[] posicaoRainhas;
+	public int[] posicaoRainhasPorColuna;
 	private final int TAMANHO_TABULEIRO = 8;
 	
 	public Tabuleiro() {
