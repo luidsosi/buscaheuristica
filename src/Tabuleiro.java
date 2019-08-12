@@ -1,7 +1,7 @@
 
 public class Tabuleiro {
 	private char [][] estado;
-	private int quantidadeAtaques;
+	private int quantidadeAtaques = 0;
 	private Posicao[] posicaoRainhas;
 	private final int TAMANHO_TABULEIRO = 8;
 	
@@ -32,7 +32,13 @@ public class Tabuleiro {
 	}
 
 	public int getQuantidadeAtaques() {
-		return quantidadeAtaques;
+		if (quantidadeAtaques != 0) {
+			return quantidadeAtaques;
+		}
+
+		setQuantidadeAtaques();
+
+		return  quantidadeAtaques;
 	}
 
 	public void setQuantidadeAtaques(int quantidadeAtaques) {
@@ -122,30 +128,43 @@ public class Tabuleiro {
 	
 	public void subidaEncosta() {
 		int menorQuantidadeAtaques = quantidadeAtaques;
-		Tabuleiro tabuleiroMenor = new Tabuleiro(posicaoRainhas);
+		Tabuleiro tabuleiroMenor = new Tabuleiro();
 		int menorFinal = quantidadeAtaques +1;
-		Tabuleiro tabuleiroFinal = new Tabuleiro(posicaoRainhas);
+		Posicao[] testePosicaoRainhas = new Posicao[8];
+
+		for (int i = 0; i < testePosicaoRainhas.length; i++) {
+			testePosicaoRainhas[i] = new Posicao();
+			testePosicaoRainhas[i].setX(getPosicaoRainhas()[i].getX());
+			testePosicaoRainhas[i].setY(getPosicaoRainhas()[i].getY());
+		}
+		Tabuleiro tabuleiroFinal = new Tabuleiro();
+		tabuleiroFinal.setPosicaoRainhas(testePosicaoRainhas);
+
 		
 		while (menorQuantidadeAtaques < menorFinal) {
 			menorFinal = menorQuantidadeAtaques;
-			Posicao testePosicaoRainhas[] = new Posicao[8];
+//			Posicao[] testePosicaoRainhas = new Posicao[8];
 			
 			for (int i = 0; i < testePosicaoRainhas.length; i++) {
-				testePosicaoRainhas[i] = new Posicao(tabuleiroMenor.getPosicaoRainhas()[i].getX(), tabuleiroMenor.getPosicaoRainhas()[i].getY());
+				testePosicaoRainhas[i] = new Posicao();
+				testePosicaoRainhas[i].setX(getPosicaoRainhas()[i].getX());
+				testePosicaoRainhas[i].setY(getPosicaoRainhas()[i].getY());
 			}
-			tabuleiroFinal = new Tabuleiro(testePosicaoRainhas);
+			tabuleiroFinal = new Tabuleiro();
+			tabuleiroFinal.setPosicaoRainhas(testePosicaoRainhas);
 			for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
 				int xOriginal = tabuleiroFinal.getPosicaoRainhas()[i].getX();
 				for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
 					tabuleiroFinal.getPosicaoRainhas()[i].setX(j);
 					
 					if (menorQuantidadeAtaques > (new Tabuleiro(tabuleiroFinal.getPosicaoRainhas())).getQuantidadeAtaques()) {
-						Posicao menorPosicaoRainhas[] = new Posicao[8];
+						Posicao[] menorPosicaoRainhas = new Posicao[8];
 						
 						for (int k = 0; k < menorPosicaoRainhas.length; k++) {
 							menorPosicaoRainhas[i] = new Posicao(tabuleiroFinal.getPosicaoRainhas()[k].getX(), tabuleiroFinal.getPosicaoRainhas()[k].getY());
 						}
-						tabuleiroMenor = new Tabuleiro(tabuleiroFinal.getPosicaoRainhas());
+						tabuleiroMenor = new Tabuleiro();
+						tabuleiroMenor.setPosicaoRainhas(tabuleiroFinal.getPosicaoRainhas());
 						menorQuantidadeAtaques = tabuleiroMenor.getQuantidadeAtaques();
 					}
 				}
