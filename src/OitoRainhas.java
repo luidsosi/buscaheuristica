@@ -158,5 +158,9 @@ public class OitoRainhas {
 		System.out.println(estadoFinal.getQuantidadeAtaques());
 		estadoFinal.printPosicaoRainhas();
 	}
+	
+	public void temperaSimulado() {
+		
+	}
 }
 	
