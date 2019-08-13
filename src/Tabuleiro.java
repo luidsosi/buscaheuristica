@@ -127,6 +127,44 @@ public class Tabuleiro {
 		System.out.println(toString());
 	}
 	
+	/*
+	 * public void subidaEncosta() { int menorQuantidadeAtaques = quantidadeAtaques;
+	 * Tabuleiro tabuleiroMenor = new Tabuleiro(); int menorFinal =
+	 * quantidadeAtaques +1; Posicao[] testePosicaoRainhas = new Posicao[8];
+	 * 
+	 * for (int i = 0; i < testePosicaoRainhas.length; i++) { testePosicaoRainhas[i]
+	 * = new Posicao(); testePosicaoRainhas[i].setX(getPosicaoRainhas()[i].getX());
+	 * testePosicaoRainhas[i].setY(getPosicaoRainhas()[i].getY()); } Tabuleiro
+	 * tabuleiroFinal = new Tabuleiro();
+	 * tabuleiroFinal.setPosicaoRainhas(testePosicaoRainhas);
+	 * 
+	 * 
+	 * while (menorQuantidadeAtaques < menorFinal) { menorFinal =
+	 * menorQuantidadeAtaques; // Posicao[] testePosicaoRainhas = new Posicao[8];
+	 * 
+	 * for (int i = 0; i < testePosicaoRainhas.length; i++) { testePosicaoRainhas[i]
+	 * = new Posicao(); testePosicaoRainhas[i].setX(getPosicaoRainhas()[i].getX());
+	 * testePosicaoRainhas[i].setY(getPosicaoRainhas()[i].getY()); } tabuleiroFinal
+	 * = new Tabuleiro(); tabuleiroFinal.setPosicaoRainhas(testePosicaoRainhas); for
+	 * (int i = 0; i < TAMANHO_TABULEIRO; i++) { int xOriginal =
+	 * tabuleiroFinal.getPosicaoRainhas()[i].getX(); for (int j = 0; j <
+	 * TAMANHO_TABULEIRO; j++) { tabuleiroFinal.getPosicaoRainhas()[i].setX(j);
+	 * 
+	 * if (menorQuantidadeAtaques > (new
+	 * Tabuleiro(tabuleiroFinal.getPosicaoRainhas())).getQuantidadeAtaques()) {
+	 * Posicao[] menorPosicaoRainhas = new Posicao[8];
+	 * 
+	 * for (int k = 0; k < menorPosicaoRainhas.length; k++) { menorPosicaoRainhas[i]
+	 * = new Posicao(tabuleiroFinal.getPosicaoRainhas()[k].getX(),
+	 * tabuleiroFinal.getPosicaoRainhas()[k].getY()); } tabuleiroMenor = new
+	 * Tabuleiro();
+	 * tabuleiroMenor.setPosicaoRainhas(tabuleiroFinal.getPosicaoRainhas());
+	 * menorQuantidadeAtaques = tabuleiroMenor.getQuantidadeAtaques(); } }
+	 * tabuleiroFinal.getPosicaoRainhas()[i].setX(xOriginal); } }
+	 * 
+	 * 
+	 * System.out.println(menorFinal); tabuleiroFinal.printPosicaoRainhas(); }
+	 */
 	public void subidaEncosta() {
 		int menorQuantidadeAtaques = quantidadeAtaques;
 		Tabuleiro tabuleiroMenor = new Tabuleiro();
@@ -177,6 +215,5 @@ public class Tabuleiro {
 		System.out.println(menorFinal);
 		tabuleiroFinal.printPosicaoRainhas();
 	}
-	
 	
 }

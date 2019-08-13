@@ -12,10 +12,16 @@ public class Main {
 				{' ',' ',' ',' ',' ',' ',' ',' '}
 		};
 		
-		Tabuleiro tabuleiro = new Tabuleiro(tabuleiroTeste);
-		System.out.println(tabuleiro.getQuantidadeAtaques());
-		tabuleiro.printPosicaoRainhas();
+		OitoRainhas oitoRainhas = new OitoRainhas(tabuleiroTeste);
+		System.out.println(oitoRainhas.getQuantidadeAtaques());
+		oitoRainhas.printPosicaoRainhas();
 		
-		tabuleiro.subidaEncosta();
+		oitoRainhas.subidaEncosta();
+		
+//		Tabuleiro tabuleiro = new Tabuleiro(tabuleiroTeste);
+//		System.out.println(tabuleiro.getQuantidadeAtaques());
+//		tabuleiro.printPosicaoRainhas();
+//		
+//		tabuleiro.subidaEncosta();
 	}
 }
