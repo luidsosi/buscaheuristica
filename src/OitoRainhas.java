@@ -49,6 +49,20 @@ public class OitoRainhas {
     public void setEstado(char[][] estado) {
         this.estado = estado;
     }
+    
+    public void setEstado() {
+        this.estado = new char[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO];
+        
+        for (int i = 0; i < estado.length; i++) {
+			for (int j = 0; j < estado.length; j++) {
+				estado[i][j] = ' ';
+			}
+		}
+        
+        for (int i = 0; i < estado.length; i++) {
+			estado[posicaoRainhaColuna[i]][i] = 'R';
+		}
+    }
 
     public int getQuantidadeAtaques() {
         if (quantidadeAtaques != 0) {
@@ -112,6 +126,7 @@ public class OitoRainhas {
 
     @Override
     public String toString() {
+    	setEstado();
         String msg = "";
         msg += "---------------------------------";
 
