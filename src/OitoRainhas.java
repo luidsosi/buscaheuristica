@@ -8,7 +8,24 @@ public class OitoRainhas {
     private final int TAMANHO_TABULEIRO = 8;
 
     public OitoRainhas() {
-        // TODO Auto-generated constructor stub
+        ArrayList<Integer> posicoes = new ArrayList<Integer>();
+        posicoes.add(0);
+        posicoes.add(1);
+        posicoes.add(2);
+        posicoes.add(3);
+        posicoes.add(4);
+        posicoes.add(5);
+        posicoes.add(6);
+        posicoes.add(7);
+        Collections.shuffle(posicoes);
+        
+        this.posicaoRainhaColuna = new int[8];
+        
+        for (int i = 0; i < posicaoRainhaColuna.length; i++) {
+			this.posicaoRainhaColuna[i] = posicoes.get(i);
+		}
+        
+        setQuantidadeAtaques();
     }
 
 
