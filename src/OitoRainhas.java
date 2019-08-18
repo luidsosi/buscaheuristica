@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class OitoRainhas {
     private char[][] estado;
@@ -7,22 +8,12 @@ public class OitoRainhas {
     public int[] posicaoRainhaColuna;
     private final int TAMANHO_TABULEIRO = 8;
 
-    public OitoRainhas() {
-        ArrayList<Integer> posicoes = new ArrayList<Integer>();
-        posicoes.add(0);
-        posicoes.add(1);
-        posicoes.add(2);
-        posicoes.add(3);
-        posicoes.add(4);
-        posicoes.add(5);
-        posicoes.add(6);
-        posicoes.add(7);
-        Collections.shuffle(posicoes);
-        
+    public OitoRainhas() {        
         this.posicaoRainhaColuna = new int[8];
+        Random random = new Random();
         
         for (int i = 0; i < posicaoRainhaColuna.length; i++) {
-			this.posicaoRainhaColuna[i] = posicoes.get(i);
+			this.posicaoRainhaColuna[i] = random.nextInt(8);
 		}
         
         setQuantidadeAtaques();
@@ -245,8 +236,9 @@ public class OitoRainhas {
 	        estadoMenor = menores.get(0);
         }
 
-        System.out.println(estadoFinal.getQuantidadeAtaques());
-        estadoFinal.printPosicaoRainhas();
+//        System.out.println(estadoFinal.getQuantidadeAtaques());
+//        estadoFinal.printPosicaoRainhas();
+        estadoFinal.print();
     }
 
     public void temperaSimulado() {
