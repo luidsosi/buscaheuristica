@@ -211,7 +211,7 @@ public class OitoRainhas {
 	            estadoFinal.getPosicaoRainhaColuna()[i] = xOriginal;
 	        }
 	
-	        int menor = estadoFinal.quantidadeAtaques;
+	        int menor = possiveis.get(0).getQuantidadeAtaques();
 	
 	        for (OitoRainhas possivel:
 	             possiveis) {
