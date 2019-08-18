@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class OitoRainhas {
     private char[][] estado;
@@ -161,45 +162,55 @@ public class OitoRainhas {
     }
 
     public void subidaEncosta2() {
-        System.out.println("Começando.");
+        System.out.println("Comecando.");
         OitoRainhas estadoMenor = new OitoRainhas(posicaoRainhaColuna);
         OitoRainhas estadoFinal = new OitoRainhas(posicaoRainhaColuna);
+        estadoFinal.setQuantidadeAtaques(this.getQuantidadeAtaques() + 1);
 
         ArrayList<OitoRainhas> possiveis = new ArrayList<OitoRainhas>();
 
 
-        for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
-            int xOriginal = estadoFinal.getPosicaoRainhaColuna()[i];
-
-            for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
-                estadoFinal.getPosicaoRainhaColuna()[i] = j;
-
-                int[] menorPosicaoRainhaColuna = new int[8];
-
-                for (int k = 0; k < menorPosicaoRainhaColuna.length; k++) {
-                    menorPosicaoRainhaColuna[k] = estadoFinal.getPosicaoRainhaColuna()[k];
-                }
-                OitoRainhas aux = new OitoRainhas();
-                aux.setPosicaoRainhaColuna(menorPosicaoRainhaColuna);
-                aux.setQuantidadeAtaques();
-
-                possiveis.add(aux);
-            }
-            estadoFinal.getPosicaoRainhaColuna()[i] = xOriginal;
-        }
-
-        int menor = estadoFinal.quantidadeAtaques;
-
-        for (OitoRainhas possivel:
-             possiveis) {
-            if (possivel.getQuantidadeAtaques() < menor) menor = possivel.getQuantidadeAtaques();
-        }
-
-        ArrayList<OitoRainhas> menores = new ArrayList<OitoRainhas>();
-
-        for (OitoRainhas possivel:
-             possiveis) {
-            if (possivel.getQuantidadeAtaques() == menor) menores.add(possivel);
+        while (estadoFinal.getQuantidadeAtaques() > estadoMenor.getQuantidadeAtaques()) {
+	        estadoFinal = estadoMenor;
+        	
+        	for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+	            int xOriginal = estadoFinal.getPosicaoRainhaColuna()[i];
+	
+	            for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+	                estadoFinal.getPosicaoRainhaColuna()[i] = j;
+	
+	                int[] menorPosicaoRainhaColuna = new int[8];
+	
+	                for (int k = 0; k < menorPosicaoRainhaColuna.length; k++) {
+	                    menorPosicaoRainhaColuna[k] = estadoFinal.getPosicaoRainhaColuna()[k];
+	                }
+	                OitoRainhas aux = new OitoRainhas();
+	                aux.setPosicaoRainhaColuna(menorPosicaoRainhaColuna);
+	                aux.setQuantidadeAtaques();
+	
+	                possiveis.add(aux);
+	            }
+	            
+	            estadoFinal.getPosicaoRainhaColuna()[i] = xOriginal;
+	        }
+	
+	        int menor = estadoFinal.quantidadeAtaques;
+	
+	        for (OitoRainhas possivel:
+	             possiveis) {
+	            if (possivel.getQuantidadeAtaques() < menor) menor = possivel.getQuantidadeAtaques();
+	        }
+	
+	        ArrayList<OitoRainhas> menores = new ArrayList<OitoRainhas>();
+	
+	        for (OitoRainhas possivel:
+	             possiveis) {
+	            if (possivel.getQuantidadeAtaques() == menor) menores.add(possivel);
+	        }
+	        
+	        Collections.shuffle(menores);
+	        
+	        estadoMenor = menores.get(0);
         }
 
         System.out.println(estadoFinal.getQuantidadeAtaques());
@@ -207,7 +218,7 @@ public class OitoRainhas {
     }
 
     public void temperaSimulado() {
-
+		
     }
 }
 	

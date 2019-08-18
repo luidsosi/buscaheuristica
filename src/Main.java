@@ -16,7 +16,7 @@ public class Main {
 		System.out.println(oitoRainhas.getQuantidadeAtaques());
 		oitoRainhas.printPosicaoRainhas();
 		
-		oitoRainhas.subidaEncosta();
+		oitoRainhas.subidaEncosta2();
 		
 //		Tabuleiro tabuleiro = new Tabuleiro(tabuleiroTeste);
 //		System.out.println(tabuleiro.getQuantidadeAtaques());
