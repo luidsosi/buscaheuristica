@@ -5,14 +5,14 @@ public class Main {
 				{' ',' ',' ',' ',' ',' ',' ',' '},
 				{' ',' ',' ',' ',' ',' ',' ',' '},
 				{' ',' ',' ',' ',' ',' ',' ',' '},
-				{'R','R','R','R','R','R','R','R'},
-				{' ',' ',' ',' ',' ',' ',' ',' '},
-				{' ',' ',' ',' ',' ',' ',' ',' '},
-				{' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ','R',' ',' ',' ',' '},
+				{'R',' ',' ',' ','R',' ',' ',' '},
+				{' ','R',' ',' ',' ','R',' ','R'},
+				{' ',' ','R',' ',' ',' ','R',' '},
 				{' ',' ',' ',' ',' ',' ',' ',' '}
 		};
 		
-		OitoRainhas oitoRainhas = new OitoRainhas();
+		OitoRainhas oitoRainhas = new OitoRainhas(true);
 		oitoRainhas.print();
 		
 		long tempoInicial = System.currentTimeMillis();

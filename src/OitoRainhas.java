@@ -9,16 +9,19 @@ public class OitoRainhas {
     private final int TAMANHO_TABULEIRO = 8;
 
     public OitoRainhas() {        
-        this.posicaoRainhaColuna = new int[8];
-        Random random = new Random();
-        
-        for (int i = 0; i < posicaoRainhaColuna.length; i++) {
-			this.posicaoRainhaColuna[i] = random.nextInt(8);
-		}
-        
-        setQuantidadeAtaques();
+    	
     }
 
+    public OitoRainhas(boolean aleatorio) {        
+    	this.posicaoRainhaColuna = new int[8];
+    	Random random = new Random();
+      
+    	for (int i = 0; i < posicaoRainhaColuna.length; i++) {
+    		this.posicaoRainhaColuna[i] = random.nextInt(8);
+    	}
+      
+    	setQuantidadeAtaques();
+    }
 
     public OitoRainhas(int[] posicaoRainhaColuna) {
         this.posicaoRainhaColuna = posicaoRainhaColuna;
