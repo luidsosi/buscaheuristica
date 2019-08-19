@@ -17,7 +17,7 @@ public class TemperaSimulada {
 		
         ArrayList<OitoRainhas> possiveis = new ArrayList<OitoRainhas>();
 
-        for (int i = TEMPERATURA; i >= 0; i--) {
+        for (int i = TEMPERATURA; i > 0 && atual.getQuantidadeAtaques() != 0; i--) {
         	for (int j = 0; j < atual.TAMANHO_TABULEIRO; j++) {
 	            int xOriginal = atual.getPosicaoRainhaColuna()[j];
 	
@@ -49,7 +49,7 @@ public class TemperaSimulada {
         	
         	if (delta > 0) {
 				atual = proximo;
-			} else if (Math.random() <= Math.exp(delta)) {
+			} else if (Math.random() <= Math.exp(delta/i)) {
 				atual = proximo;
 			}
 		}

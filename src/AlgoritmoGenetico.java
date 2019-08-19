@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 
 public class AlgoritmoGenetico {
-	private final int POPULACAO_INICIAL = 100;
+	private int populacaoInicial;
 	private ArrayList<OitoRainhas> populacao;
 	
-	public AlgoritmoGenetico() {
+	
+	public AlgoritmoGenetico(int populacaoInicial) {
+		this.populacaoInicial = populacaoInicial;
 		this.populacao = new ArrayList<OitoRainhas>();
 		
-		for (int i = 0; i < POPULACAO_INICIAL; i++) {
+		for (int i = 0; i < populacaoInicial; i++) {
 			populacao.add(new OitoRainhas(true));
 		}
 	}
