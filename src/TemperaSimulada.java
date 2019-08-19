@@ -4,18 +4,21 @@ import java.util.Random;
 
 public class TemperaSimulada {
 	private final int TEMPERATURA = 2000;
+	private OitoRainhas tabuleiroInicial;
 	
 	public TemperaSimulada() {
-		// TODO Auto-generated constructor stub
+		this.tabuleiroInicial = new OitoRainhas(true);
+	}
+	
+	public TemperaSimulada(OitoRainhas tabuleiroInicial) {
+		this.tabuleiroInicial = tabuleiroInicial;
 	}
 	
 	public void resolve() {
-		OitoRainhas atual = new OitoRainhas(true);
-		atual.print();
+		System.out.println("Buscando...");
+		OitoRainhas atual = tabuleiroInicial;
 		
-		System.out.println("Comecando");
-		
-        ArrayList<OitoRainhas> possiveis = new ArrayList<OitoRainhas>();
+        ArrayList<OitoRainhas> vizinhos = new ArrayList<OitoRainhas>();
 
         for (int i = TEMPERATURA; i > 0 && atual.getQuantidadeAtaques() != 0; i--) {
         	for (int j = 0; j < atual.TAMANHO_TABULEIRO; j++) {
@@ -34,16 +37,16 @@ public class TemperaSimulada {
 		                aux.setPosicaoRainhaColuna(temp);
 		                aux.setQuantidadeAtaques();
 		
-		                possiveis.add(aux);
+		                vizinhos.add(aux);
 			
 					}            
 	            }
 	            
 	            atual.getPosicaoRainhaColuna()[j] = xOriginal;
 	        }
-        	Collections.shuffle(possiveis);
+        	Collections.shuffle(vizinhos);
         	
-        	OitoRainhas proximo = possiveis.get(0);
+        	OitoRainhas proximo = vizinhos.get(0);
         	
         	int delta = atual.getQuantidadeAtaques() - proximo.getQuantidadeAtaques();
         	

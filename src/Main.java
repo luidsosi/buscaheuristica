@@ -1,16 +1,16 @@
 
 public class Main {
 	public static void main(String[] args) {
-//		char [][] tabuleiroTeste = {
-//				{' ',' ',' ',' ',' ',' ',' ',' '},
-//				{' ',' ',' ',' ',' ',' ',' ',' '},
-//				{' ',' ',' ',' ',' ',' ',' ',' '},
-//				{' ',' ',' ','R',' ',' ',' ',' '},
-//				{'R',' ',' ',' ','R',' ',' ',' '},
-//				{' ','R',' ',' ',' ','R',' ','R'},
-//				{' ',' ','R',' ',' ',' ','R',' '},
-//				{' ',' ',' ',' ',' ',' ',' ',' '}
-//		};
+		char [][] tabuleiroTeste = {
+				{' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ','R',' ',' ',' ',' '},
+				{'R',' ',' ',' ','R',' ',' ',' '},
+				{' ','R',' ',' ',' ','R',' ','R'},
+				{' ',' ','R',' ',' ',' ','R',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' '}
+		};
 //		
 //		OitoRainhas oitoRainhas = new OitoRainhas(true);
 //		oitoRainhas.print();
@@ -26,6 +26,7 @@ public class Main {
 //		long tempoExecucao = tempoFinal - tempoInicial;
 //		System.out.println("Tempo de execução: " + tempoExecucao + "ms");
 		
-		(new AlgoritmoGenetico(100)).resolve();
+//		(new AlgoritmoGenetico(100)).resolve();
+		(new TemperaSimulada(new OitoRainhas(tabuleiroTeste))).resolve();
 	}
 }
