@@ -20,10 +20,12 @@ public class Main {
 //		long tempoFinal = System.currentTimeMillis();
 //		long tempoExecucao = tempoFinal - tempoInicial;
 //		System.out.println("Tempo de execução: " + tempoExecucao + "ms");
-		long tempoInicial = System.currentTimeMillis();
-		(new TemperaSimulada()).resolve();
-		long tempoFinal = System.currentTimeMillis();
-		long tempoExecucao = tempoFinal - tempoInicial;
-		System.out.println("Tempo de execução: " + tempoExecucao + "ms");
+//		long tempoInicial = System.currentTimeMillis();
+//		(new TemperaSimulada()).resolve();
+//		long tempoFinal = System.currentTimeMillis();
+//		long tempoExecucao = tempoFinal - tempoInicial;
+//		System.out.println("Tempo de execução: " + tempoExecucao + "ms");
+		
+		(new AlgoritmoGenetico(100)).resolve();
 	}
 }
