@@ -13,36 +13,36 @@ public class SubidaEncosta {
 		this.tabuleiroInicial = tabuleiroInicial;
 	}
 	
-	public void resolve() {
+	public OitoRainhas resolve() {
         System.out.println("Buscando...");
 
-        OitoRainhas solucao = new OitoRainhas(tabuleiroInicial.getPosicaoRainhaColuna());
+        OitoRainhas atual = new OitoRainhas(tabuleiroInicial.getPosicaoRainhaColuna());
 
         ArrayList<OitoRainhas> vizinhos = new ArrayList<OitoRainhas>();
 
 
         while (true) {
-        	for (int i = 0; i < solucao.TAMANHO_TABULEIRO; i++) {
-	            int xOriginal = solucao.getPosicaoRainhaColuna()[i];
+        	for (int i = 0; i < atual.TAMANHO_TABULEIRO; i++) {
+	            int xOriginal = atual.getPosicaoRainhaColuna()[i];
 	
-	            for (int j = 0; j < solucao.TAMANHO_TABULEIRO; j++) {
+	            for (int j = 0; j < atual.TAMANHO_TABULEIRO; j++) {
 	                if (j != xOriginal) {
-	                	solucao.getPosicaoRainhaColuna()[i] = j;
+	                	atual.getPosicaoRainhaColuna()[i] = j;
 	                	
-	                	int[] menorPosicaoRainhaColuna = new int[8];
+	                	int[] temp = new int[8];
 	                	
-	                	for (int k = 0; k < menorPosicaoRainhaColuna.length; k++) {
-	                		menorPosicaoRainhaColuna[k] = solucao.getPosicaoRainhaColuna()[k];
+	                	for (int k = 0; k < temp.length; k++) {
+	                		temp[k] = atual.getPosicaoRainhaColuna()[k];
 	                	}
 	                	OitoRainhas aux = new OitoRainhas();
-	                	aux.setPosicaoRainhaColuna(menorPosicaoRainhaColuna);
+	                	aux.setPosicaoRainhaColuna(temp);
 	                	aux.setQuantidadeAtaques();
 	                	
 	                	vizinhos.add(aux);						
 					}
 	            }
 	            
-	            solucao.getPosicaoRainhaColuna()[i] = xOriginal;
+	            atual.getPosicaoRainhaColuna()[i] = xOriginal;
 	        }
         	
         	vizinhos.sort(new Comparator<OitoRainhas>() {
@@ -56,13 +56,14 @@ public class SubidaEncosta {
     			}
     		});
 	        
-	        if (vizinhos.get(0).getQuantidadeAtaques() >= solucao.getQuantidadeAtaques()) {
+	        if (vizinhos.get(0).getQuantidadeAtaques() >= atual.getQuantidadeAtaques()) {
 				break;
 			} else {
-				solucao = vizinhos.get(0);
+				atual = vizinhos.get(0);
 			}
         }
         
-        solucao.print();
+        atual.print();
+        return atual;
     }
 }

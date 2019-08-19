@@ -14,7 +14,7 @@ public class TemperaSimulada {
 		this.tabuleiroInicial = tabuleiroInicial;
 	}
 	
-	public void resolve() {
+	public OitoRainhas resolve() {
 		System.out.println("Buscando...");
 		OitoRainhas atual = tabuleiroInicial;
 		
@@ -58,5 +58,6 @@ public class TemperaSimulada {
 		}
         
         atual.print();
+        return atual;
     }
 }

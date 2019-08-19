@@ -16,7 +16,8 @@ public class AlgoritmoGenetico {
 		}
 	}
 	
-	public void resolve() {
+	public OitoRainhas resolve() {
+		System.out.println("Buscando...");
 		boolean solucaoEncontrada = false;
 		OitoRainhas solucao = new OitoRainhas();
 		int quantidadeElitismo = (int) (populacaoInicial * 0.1);
@@ -40,6 +41,7 @@ public class AlgoritmoGenetico {
 		} while (!solucaoEncontrada);
 		
 		solucao.print();
+		return solucao;
 	}
 	
 	private boolean funcaoObjetivo(OitoRainhas oitoRainhas) {

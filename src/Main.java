@@ -11,22 +11,26 @@ public class Main {
 				{' ',' ','R',' ',' ',' ','R',' '},
 				{' ',' ',' ',' ',' ',' ',' ',' '}
 		};
-//		
-//		OitoRainhas oitoRainhas = new OitoRainhas(true);
-//		oitoRainhas.print();
-//		
+		
+		OitoRainhas oitoRainhas = new OitoRainhas(tabuleiroTeste);
+		oitoRainhas.print();
+		
 //		long tempoInicial = System.currentTimeMillis();
-//		oitoRainhas.subidaEncosta();
-//		long tempoFinal = System.currentTimeMillis();
-//		long tempoExecucao = tempoFinal - tempoInicial;
-//		System.out.println("Tempo de execução: " + tempoExecucao + "ms");
-//		long tempoInicial = System.currentTimeMillis();
-//		(new TemperaSimulada()).resolve();
+//		(new SubidaEncosta(oitoRainhas)).resolve();
 //		long tempoFinal = System.currentTimeMillis();
 //		long tempoExecucao = tempoFinal - tempoInicial;
 //		System.out.println("Tempo de execução: " + tempoExecucao + "ms");
 		
+		long tempoInicial = System.currentTimeMillis();
+		(new TemperaSimulada(oitoRainhas)).resolve();
+		long tempoFinal = System.currentTimeMillis();
+		long tempoExecucao = tempoFinal - tempoInicial;
+		System.out.println("Tempo de execução: " + tempoExecucao + "ms");
+		
+//		long tempoInicial = System.currentTimeMillis();
 //		(new AlgoritmoGenetico(100)).resolve();
-		(new TemperaSimulada(new OitoRainhas(tabuleiroTeste))).resolve();
+//		long tempoFinal = System.currentTimeMillis();
+//		long tempoExecucao = tempoFinal - tempoInicial;
+//		System.out.println("Tempo de execução: " + tempoExecucao + "ms");
 	}
 }
