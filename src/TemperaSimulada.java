@@ -49,7 +49,7 @@ public class TemperaSimulada {
         	
         	if (delta > 0) {
 				atual = proximo;
-			} else if (Math.random() <= Math.exp(delta/i)) {
+			} else if (Math.random() >= Math.exp(delta/i)) {
 				atual = proximo;
 			}
 		}
