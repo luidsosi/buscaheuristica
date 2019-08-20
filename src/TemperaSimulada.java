@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.Random;
 
 public class TemperaSimulada {
-	private final int TEMPERATURA = 2000;
+	private final int TEMPERATURA_INICIAL = 2000;
 	private OitoRainhas tabuleiroInicial;
 	
 	public TemperaSimulada() {
@@ -16,11 +16,14 @@ public class TemperaSimulada {
 	
 	public OitoRainhas resolve() {
 		System.out.println("Buscando...");
+		long tempoInicial = System.currentTimeMillis();
+
+		int quantidadeIteracoes = 0;
 		OitoRainhas atual = tabuleiroInicial;
 		
         ArrayList<OitoRainhas> vizinhos = new ArrayList<OitoRainhas>();
 
-        for (int i = TEMPERATURA; i > 0 && atual.getQuantidadeAtaques() != 0; i--) {
+        for (int temperatura = TEMPERATURA_INICIAL; temperatura > 0 && atual.getQuantidadeAtaques() != 0; temperatura--) {
         	for (int j = 0; j < atual.TAMANHO_TABULEIRO; j++) {
 	            int xOriginal = atual.getPosicaoRainhaColuna()[j];
 	
@@ -52,12 +55,19 @@ public class TemperaSimulada {
         	
         	if (delta > 0) {
 				atual = proximo;
-			} else if (Math.random() >= Math.exp(delta/i)) {
+			} else if (Math.random() >= Math.exp(delta/temperatura)) {
 				atual = proximo;
 			}
+
+        	quantidadeIteracoes++;
 		}
-        
-        atual.print();
-        return atual;
+		long tempoFinal = System.currentTimeMillis();
+		long tempoExecucao = tempoFinal - tempoInicial;
+
+		atual.print();
+		System.out.println("Quantidade de iteracoes:" + quantidadeIteracoes);
+		System.out.println("Tempo de execucao: " + tempoExecucao + "ms");
+
+		return atual;
     }
 }
