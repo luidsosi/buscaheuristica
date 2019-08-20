@@ -15,35 +15,17 @@ public class SubidaEncosta {
 	
 	public OitoRainhas resolve() {
         System.out.println("Buscando...");
+        
+        long tempoInicial = System.currentTimeMillis();
 
+        int quantidadeIteracoes = 0;
         OitoRainhas atual = new OitoRainhas(tabuleiroInicial.getPosicaoRainhaColuna());
 
         ArrayList<OitoRainhas> vizinhos = new ArrayList<OitoRainhas>();
 
 
         while (true) {
-        	for (int i = 0; i < atual.TAMANHO_TABULEIRO; i++) {
-	            int xOriginal = atual.getPosicaoRainhaColuna()[i];
-	
-	            for (int j = 0; j < atual.TAMANHO_TABULEIRO; j++) {
-	                if (j != xOriginal) {
-	                	atual.getPosicaoRainhaColuna()[i] = j;
-	                	
-	                	int[] temp = new int[8];
-	                	
-	                	for (int k = 0; k < temp.length; k++) {
-	                		temp[k] = atual.getPosicaoRainhaColuna()[k];
-	                	}
-	                	OitoRainhas aux = new OitoRainhas();
-	                	aux.setPosicaoRainhaColuna(temp);
-	                	aux.setQuantidadeAtaques();
-	                	
-	                	vizinhos.add(aux);						
-					}
-	            }
-	            
-	            atual.getPosicaoRainhaColuna()[i] = xOriginal;
-	        }
+        	vizinhos = getVizinhos(atual);
         	
         	vizinhos.sort(new Comparator<OitoRainhas>() {
     			@Override
@@ -56,14 +38,56 @@ public class SubidaEncosta {
     			}
     		});
 	        
-	        if (vizinhos.get(0).getQuantidadeAtaques() >= atual.getQuantidadeAtaques()) {
+        	quantidadeIteracoes++;
+        	
+        	if (vizinhos.get(0).getQuantidadeAtaques() >= atual.getQuantidadeAtaques()) {
 				break;
 			} else {
 				atual = vizinhos.get(0);
 			}
         }
         
+        long tempoFinal = System.currentTimeMillis();
+		long tempoExecucao = tempoFinal - tempoInicial;
+        
         atual.print();
+        System.out.println("Quantidade de iteracoes: " + quantidadeIteracoes);
+        System.out.println("Tempo de execucao: " + tempoExecucao + "ms");
+        
         return atual;
     }
+	
+	public int[] clonaVetor(int[] vetor) {
+		int[] clone = new int[vetor.length];
+		
+		for (int i = 0; i < clone.length; i++) {
+    		clone[i] = vetor[i];
+    	}
+		
+		return clone;
+	}
+	
+	public ArrayList<OitoRainhas> getVizinhos(OitoRainhas oitoRainhas) {
+		ArrayList<OitoRainhas> vizinhos = new ArrayList<OitoRainhas>();
+		
+		for (int i = 0; i < oitoRainhas.TAMANHO_TABULEIRO; i++) {
+            int xOriginal = oitoRainhas.getPosicaoRainhaColuna()[i];
+
+            for (int j = 0; j < oitoRainhas.TAMANHO_TABULEIRO; j++) {
+                if (j != xOriginal) {
+                	oitoRainhas.getPosicaoRainhaColuna()[i] = j;
+                	
+                	OitoRainhas aux = new OitoRainhas();
+                	aux.setPosicaoRainhaColuna(clonaVetor(oitoRainhas.getPosicaoRainhaColuna()));
+                	aux.setQuantidadeAtaques();
+                	
+                	vizinhos.add(aux);						
+				}
+            }
+            
+            oitoRainhas.getPosicaoRainhaColuna()[i] = xOriginal;
+        }
+		
+		return vizinhos;
+	}
 }

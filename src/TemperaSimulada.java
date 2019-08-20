@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class TemperaSimulada {
 	private final int TEMPERATURA_INICIAL = 2000;
@@ -19,34 +18,14 @@ public class TemperaSimulada {
 		long tempoInicial = System.currentTimeMillis();
 
 		int quantidadeIteracoes = 0;
-		OitoRainhas atual = tabuleiroInicial;
+		OitoRainhas atual = new OitoRainhas();
+		atual.setPosicaoRainhaColuna(tabuleiroInicial.getPosicaoRainhaColuna());
+		atual.setQuantidadeAtaques();
 		
         ArrayList<OitoRainhas> vizinhos = new ArrayList<OitoRainhas>();
 
         for (int temperatura = TEMPERATURA_INICIAL; temperatura > 0 && atual.getQuantidadeAtaques() != 0; temperatura--) {
-        	for (int j = 0; j < atual.TAMANHO_TABULEIRO; j++) {
-	            int xOriginal = atual.getPosicaoRainhaColuna()[j];
-	
-	            for (int k = 0; k < atual.TAMANHO_TABULEIRO; k++) {
-	                if (k != xOriginal) {
-		            	atual.getPosicaoRainhaColuna()[j] = k;
-		
-		                int[] temp = new int[8];
-		
-		                for (int k2 = 0; k2 < temp.length; k2++) {
-		                    temp[k2] = atual.getPosicaoRainhaColuna()[k2];
-		                }
-		                OitoRainhas aux = new OitoRainhas();
-		                aux.setPosicaoRainhaColuna(temp);
-		                aux.setQuantidadeAtaques();
-		
-		                vizinhos.add(aux);
-			
-					}            
-	            }
-	            
-	            atual.getPosicaoRainhaColuna()[j] = xOriginal;
-	        }
+        	vizinhos = getVizinhos(atual);
         	Collections.shuffle(vizinhos);
         	
         	OitoRainhas proximo = vizinhos.get(0);
@@ -55,7 +34,7 @@ public class TemperaSimulada {
         	
         	if (delta > 0) {
 				atual = proximo;
-			} else if (Math.random() >= Math.exp(delta/temperatura)) {
+			} else if (Math.random() >= Math.exp(-delta/temperatura)) {
 				atual = proximo;
 			}
 
@@ -70,4 +49,38 @@ public class TemperaSimulada {
 
 		return atual;
     }
+	
+	public int[] clonaVetor(int[] vetor) {
+		int[] clone = new int[vetor.length];
+		
+		for (int i = 0; i < clone.length; i++) {
+    		clone[i] = vetor[i];
+    	}
+		
+		return clone;
+	}
+	
+	public ArrayList<OitoRainhas> getVizinhos(OitoRainhas oitoRainhas) {
+		ArrayList<OitoRainhas> vizinhos = new ArrayList<OitoRainhas>();
+		
+		for (int i = 0; i < oitoRainhas.TAMANHO_TABULEIRO; i++) {
+            int xOriginal = oitoRainhas.getPosicaoRainhaColuna()[i];
+
+            for (int j = 0; j < oitoRainhas.TAMANHO_TABULEIRO; j++) {
+                if (j != xOriginal) {
+                	oitoRainhas.getPosicaoRainhaColuna()[i] = j;
+                	
+                	OitoRainhas aux = new OitoRainhas();
+                	aux.setPosicaoRainhaColuna(clonaVetor(oitoRainhas.getPosicaoRainhaColuna()));
+                	aux.setQuantidadeAtaques();
+                	
+                	vizinhos.add(aux);						
+				}
+            }
+            
+            oitoRainhas.getPosicaoRainhaColuna()[i] = xOriginal;
+        }
+		
+		return vizinhos;
+	}
 }
